@@ -1,1 +1,849 @@
 
+
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>WATCHZONE</title>
+
+<style>
+
+* {
+
+  box-sizing: border-box;
+
+  margin: 0;
+
+  padding: 0;
+
+}
+
+body {
+
+  font-family: Arial, sans-serif;
+
+  background: #0b0f16;
+
+  color: white;
+
+}
+
+header {
+
+  background: #111722;
+
+  padding: 16px;
+
+  border-bottom: 1px solid #263244;
+
+  position: sticky;
+
+  top: 0;
+
+  z-index: 10;
+
+}
+
+.logo {
+
+  font-size: 26px;
+
+  font-weight: 900;
+
+  color: #a78bfa;
+
+}
+
+.logo span {
+
+  color: white;
+
+}
+
+.top {
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+}
+
+button {
+
+  border: none;
+
+  cursor: pointer;
+
+  color: white;
+
+  background: #202b3b;
+
+  border-radius: 10px;
+
+  padding: 11px 15px;
+
+  font-size: 15px;
+
+}
+
+button:hover {
+
+  background: #35445a;
+
+}
+
+nav {
+
+  display: flex;
+
+  gap: 8px;
+
+  margin-top: 16px;
+
+  overflow-x: auto;
+
+}
+
+nav button {
+
+  white-space: nowrap;
+
+}
+
+.active {
+
+  background: #8b5cf6;
+
+}
+
+.container {
+
+  max-width: 650px;
+
+  margin: auto;
+
+  padding: 16px;
+
+}
+
+.card {
+
+  background: #151d29;
+
+  border: 1px solid #263244;
+
+  border-radius: 16px;
+
+  padding: 16px;
+
+  margin-bottom: 16px;
+
+}
+
+.create textarea {
+
+  width: 100%;
+
+  background: #0b0f16;
+
+  color: white;
+
+  border: 1px solid #344155;
+
+  border-radius: 10px;
+
+  padding: 12px;
+
+  font-size: 16px;
+
+  resize: vertical;
+
+  min-height: 85px;
+
+}
+
+.create-actions {
+
+  display: flex;
+
+  gap: 8px;
+
+  flex-wrap: wrap;
+
+  margin-top: 12px;
+
+}
+
+.post-header {
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 10px;
+
+  margin-bottom: 12px;
+
+}
+
+.avatar {
+
+  width: 42px;
+
+  height: 42px;
+
+  border-radius: 50%;
+
+  background: #8b5cf6;
+
+  display: flex;
+
+  justify-content: center;
+
+  align-items: center;
+
+  font-weight: bold;
+
+}
+
+.username {
+
+  font-weight: bold;
+
+}
+
+.time {
+
+  font-size: 12px;
+
+  color: #8d9aab;
+
+  margin-top: 4px;
+
+}
+
+.post-text {
+
+  line-height: 1.6;
+
+  margin: 12px 0;
+
+  white-space: pre-wrap;
+
+}
+
+.post-image {
+
+  width: 100%;
+
+  border-radius: 12px;
+
+  margin-top: 10px;
+
+}
+
+.actions {
+
+  display: flex;
+
+  gap: 8px;
+
+  margin-top: 12px;
+
+  flex-wrap: wrap;
+
+}
+
+.actions button {
+
+  background: transparent;
+
+  color: #b9c5d5;
+
+}
+
+.actions button.liked {
+
+  color: #f472b6;
+
+}
+
+.comment-box {
+
+  display: flex;
+
+  gap: 8px;
+
+  margin-top: 12px;
+
+}
+
+.comment-box input {
+
+  flex: 1;
+
+  min-width: 0;
+
+  background: #0b0f16;
+
+  border: 1px solid #344155;
+
+  color: white;
+
+  padding: 10px;
+
+  border-radius: 10px;
+
+}
+
+.comments {
+
+  color: #cbd5e1;
+
+  font-size: 14px;
+
+  margin-top: 10px;
+
+}
+
+.story-row {
+
+  display: flex;
+
+  gap: 12px;
+
+  overflow-x: auto;
+
+  padding: 5px 0;
+
+}
+
+.story {
+
+  min-width: 70px;
+
+  text-align: center;
+
+  font-size: 12px;
+
+}
+
+.story-avatar {
+
+  width: 58px;
+
+  height: 58px;
+
+  border-radius: 50%;
+
+  border: 3px solid #a78bfa;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  margin: auto auto 7px;
+
+  background: #202b3b;
+
+  font-size: 22px;
+
+}
+
+footer {
+
+  text-align: center;
+
+  color: #748196;
+
+  padding: 25px;
+
+  font-size: 13px;
+
+}
+
+.empty {
+
+  text-align: center;
+
+  padding: 35px;
+
+  color: #94a3b8;
+
+}
+
+.hidden {
+
+  display: none;
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header>
+
+  <div class="top">
+
+    <div class="logo">WATCH<span>ZONE</span></div>
+
+    <button onclick="alert('Welcome to WATCHZONE!')">☰</button>
+
+  </div>
+
+  <nav>
+
+    <button class="active" onclick="showTab('feed',this)">🏠 Feed</button>
+
+    <button onclick="showTab('videos',this)">🎬 Videos</button>
+
+    <button onclick="showTab('photos',this)">📸 Photos</button>
+
+    <button onclick="showTab('memes',this)">😂 Memes</button>
+
+  </nav>
+
+</header>
+
+<main class="container">
+
+  <section id="feed">
+
+    <div class="card">
+
+      <h3 style="margin-bottom:14px;">🔥 Discover WATCHZONE</h3>
+
+      <div class="story-row">
+
+        <div class="story">
+
+          <div class="story-avatar">➕</div>
+
+          Add post
+
+        </div>
+
+        <div class="story">
+
+          <div class="story-avatar">🎮</div>
+
+          Gaming
+
+        </div>
+
+        <div class="story">
+
+          <div class="story-avatar">😂</div>
+
+          Memes
+
+        </div>
+
+        <div class="story">
+
+          <div class="story-avatar">🎬</div>
+
+          Movies
+
+        </div>
+
+        <div class="story">
+
+          <div class="story-avatar">🌍</div>
+
+          People
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="card create">
+
+      <h3 style="margin-bottom:12px;">Create a post</h3>
+
+      <textarea id="postText" placeholder="What's happening in your world?"></textarea>
+
+      <div class="create-actions">
+
+        <button onclick="document.getElementById('imageInput').click()">📷 Photo</button>
+
+        <button onclick="document.getElementById('videoInput').click()">🎥 Video</button>
+
+        <button class="active" onclick="createPost()">Post ➤</button>
+
+      </div>
+
+      <input id="imageInput" type="file" accept="image/*" hidden>
+
+      <input id="videoInput" type="file" accept="video/*" hidden>
+
+      <div id="preview"></div>
+
+    </div>
+
+    <div id="posts">
+
+      <div class="card post" data-type="memes">
+
+        <div class="post-header">
+
+          <div class="avatar">W</div>
+
+          <div>
+
+            <div class="username">WATCHZONE</div>
+
+            <div class="time">Welcome post</div>
+
+          </div>
+
+        </div>
+
+        <div class="post-text">
+
+Welcome to WATCHZONE! 🎉
+
+Watch. Share. Connect.
+
+A new place for videos, pictures, memes and community. This is just the beginning!
+
+        </div>
+
+        <div class="actions">
+
+          <button onclick="likePost(this)">♡ Like <span>0</span></button>
+
+          <button onclick="toggleComment(this)">💬 Comment</button>
+
+          <button onclick="sharePost(this)">↗ Share</button>
+
+        </div>
+
+        <div class="comment-section hidden">
+
+          <div class="comment-box">
+
+            <input placeholder="Write a comment...">
+
+            <button onclick="addComment(this)">Send</button>
+
+          </div>
+
+          <div class="comments"></div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+  <section id="videos" class="hidden">
+
+    <div class="card">
+
+      <h2>🎬 Videos</h2>
+
+      <p style="margin-top:10px;color:#94a3b8;">Video posts will appear here.</p>
+
+    </div>
+
+  </section>
+
+  <section id="photos" class="hidden">
+
+    <div class="card">
+
+      <h2>📸 Photos</h2>
+
+      <p style="margin-top:10px;color:#94a3b8;">Photo posts will appear here.</p>
+
+    </div>
+
+  </section>
+
+  <section id="memes" class="hidden">
+
+    <div class="card">
+
+      <h2>😂 Memes</h2>
+
+      <p style="margin-top:10px;color:#94a3b8;">Funny posts will appear here.</p>
+
+    </div>
+
+  </section>
+
+</main>
+
+<footer>
+
+  WATCHZONE © 2026 · Watch. Share. Connect.
+
+</footer>
+
+<script>
+
+let selectedFile = null;
+
+const imageInput = document.getElementById("imageInput");
+
+const videoInput = document.getElementById("videoInput");
+
+imageInput.onchange = function() {
+
+  selectedFile = this.files[0];
+
+  previewFile(selectedFile);
+
+};
+
+videoInput.onchange = function() {
+
+  selectedFile = this.files[0];
+
+  previewFile(selectedFile);
+
+};
+
+function previewFile(file) {
+
+  if (!file) return;
+
+  const preview = document.getElementById("preview");
+
+  const url = URL.createObjectURL(file);
+
+  if (file.type.startsWith("image/")) {
+
+    preview.innerHTML = `<img class="post-image" src="${url}">`;
+
+  } else if (file.type.startsWith("video/")) {
+
+    preview.innerHTML = `<video class="post-image" controls src="${url}"></video>`;
+
+  }
+
+}
+
+function createPost() {
+
+  const text = document.getElementById("postText").value.trim();
+
+  if (!text && !selectedFile) {
+
+    alert("Write something or select a photo/video first!");
+
+    return;
+
+  }
+
+  const posts = document.getElementById("posts");
+
+  const card = document.createElement("div");
+
+  card.className = "card post";
+
+  let media = "";
+
+  if (selectedFile) {
+
+    const url = URL.createObjectURL(selectedFile);
+
+    if (selectedFile.type.startsWith("image/")) {
+
+      media = `<img class="post-image" src="${url}">`;
+
+    } else {
+
+      media = `<video class="post-image" controls src="${url}"></video>`;
+
+    }
+
+  }
+
+  card.innerHTML = `
+
+    <div class="post-header">
+
+      <div class="avatar">J</div>
+
+      <div>
+
+        <div class="username">Jonny</div>
+
+        <div class="time">Just now</div>
+
+      </div>
+
+    </div>
+
+    <div class="post-text"></div>
+
+    ${media}
+
+    <div class="actions">
+
+      <button onclick="likePost(this)">♡ Like <span>0</span></button>
+
+      <button onclick="toggleComment(this)">💬 Comment</button>
+
+      <button onclick="sharePost(this)">↗ Share</button>
+
+    </div>
+
+    <div class="comment-section hidden">
+
+      <div class="comment-box">
+
+        <input placeholder="Write a comment...">
+
+        <button onclick="addComment(this)">Send</button>
+
+      </div>
+
+      <div class="comments"></div>
+
+    </div>
+
+  `;
+
+  card.querySelector(".post-text").textContent = text;
+
+  posts.prepend(card);
+
+  document.getElementById("postText").value = "";
+
+  document.getElementById("preview").innerHTML = "";
+
+  selectedFile = null;
+
+  imageInput.value = "";
+
+  videoInput.value = "";
+
+}
+
+function likePost(button) {
+
+  const count = button.querySelector("span");
+
+  let likes = Number(count.textContent);
+
+  if (button.classList.contains("liked")) {
+
+    likes--;
+
+    button.classList.remove("liked");
+
+    button.firstChild.textContent = "♡ Like ";
+
+  } else {
+
+    likes++;
+
+    button.classList.add("liked");
+
+    button.firstChild.textContent = "♥ Liked ";
+
+  }
+
+  count.textContent = likes;
+
+}
+
+function toggleComment(button) {
+
+  const section = button.closest(".post").querySelector(".comment-section");
+
+  section.classList.toggle("hidden");
+
+}
+
+function addComment(button) {
+
+  const input = button.parentElement.querySelector("input");
+
+  const comments = button.closest(".comment-section").querySelector(".comments");
+
+  if (!input.value.trim()) return;
+
+  const comment = document.createElement("p");
+
+  comment.style.marginTop = "8px";
+
+  comment.textContent = "👤 " + input.value;
+
+  comments.appendChild(comment);
+
+  input.value = "";
+
+}
+
+function sharePost(button) {
+
+  const post = button.closest(".post");
+
+  const text = post.querySelector(".post-text").textContent;
+
+  if (navigator.share) {
+
+    navigator.share({
+
+      title: "WATCHZONE",
+
+      text: text,
+
+      url: location.href
+
+    });
+
+  } else {
+
+    alert("Copy this website link and share it with your friends!");
+
+  }
+
+}
+
+function showTab(tab, button) {
+
+  document.querySelectorAll("main section").forEach(section => {
+
+    section.classList.add("hidden");
+
+  });
+
+  document.getElementById(tab).classList.remove("hidden");
+
+  document.querySelectorAll("nav button").forEach(btn => {
+
+    btn.classList.remove("active");
+
+  });
+
+  button.classList.add("active");
+
+}
+
+</script>
+
+</body>
+
+</html>
